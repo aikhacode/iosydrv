@@ -1,0 +1,150 @@
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { View, StyleSheet, Alert } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
+import Geolocation from '@react-native-community/geolocation';
+
+const SmoothTrackingMap = () => {
+    const [userLocation, setUserLocation] = useState(null);
+    const [heading, setHeading] = useState(0);
+    const mapViewRef = useRef(null);
+    const watchIdRef = useRef(null);
+
+    // Watch position with optimized settings
+    useEffect(() => {
+        // Request location permission (implement based on your needs)
+        // Geolocation.requestAuthorization();
+
+        watchIdRef.current = Geolocation.watchPosition(
+            (position) => {
+                const { latitude, longitude, heading: deviceHeading } = position.coords;
+                const newLocation = { latitude, longitude };
+                const newHeading = deviceHeading !== null ? deviceHeading : heading;
+
+                // Update state for marker
+                setUserLocation(newLocation);
+                setHeading(newHeading);
+
+                // Smoothly move camera to follow user
+                if (mapViewRef.current) {
+                    mapViewRef.current.animateCamera({
+                        center: newLocation,
+                        // heading: newHeading,
+                        pitch: 0,
+                        altitude: 1000,
+                    }, {
+                        duration: 300 // Smooth animation
+                    });
+                }
+            },
+            (error) => {
+                console.log('Location error:', error);
+                Alert.alert('Location Error', 'Could not get your location');
+            },
+            {
+                enableHighAccuracy: true,
+                timeout: 15000,
+                maximumAge: 1000,    // Accept cached location up to 1 second old
+                distanceFilter: 2,   // Update every 2 meters minimum
+            }
+        );
+
+        return () => {
+            if (watchIdRef.current) {
+                Geolocation.clearWatch(watchIdRef.current);
+            }
+        };
+    }, [heading]); // Include heading in dependency array
+
+    // Custom heading marker component
+    const HeadingMarker = useCallback(({ coordinate, rotation }) => {
+        return (
+            <Marker
+                coordinate={coordinate}
+                rotation={rotation}
+                flat={true}
+                anchor={{ x: 0.5, y: 0.5 }}
+            >
+                <View style={styles.markerContainer}>
+                    <View style={[styles.markerArrow, { transform: [{ rotate: `${rotation}deg` }] }]}>
+                        <View style={styles.arrowHead} />
+                        <View style={styles.arrowBody} />
+                    </View>
+                </View>
+            </Marker>
+        );
+    }, []);
+
+    return (
+        <View style={styles.container}>
+            <MapView
+                ref={mapViewRef}
+                style={styles.map}
+                showsUserLocation={false}        // We handle this manually
+                followsUserLocation={false}      // We handle this manually
+                rotateEnabled={false}
+                pitchEnabled={false}             // Disable pitch for better performance
+                showsCompass={false}
+                // loadingEnabled={true}
+                loadingIndicatorColor="#666666"
+                loadingBackgroundColor="#eeeeee"
+                initialRegion={{
+                    latitude: 37.78825,
+                    longitude: -122.4324,
+                    latitudeDelta: 0.01,
+                    longitudeDelta: 0.01,
+                }}
+            >
+                {userLocation && (
+                    <HeadingMarker
+                        coordinate={userLocation}
+                        rotation={heading}
+                    />
+                )}
+            </MapView>
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    map: {
+        ...StyleSheet.absoluteFillObject,
+
+    },
+    markerContainer: {
+        width: 40,
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    markerArrow: {
+        width: 30,
+        height: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    arrowHead: {
+        width: 0,
+        height: 0,
+        backgroundColor: 'transparent',
+        borderStyle: 'solid',
+        borderTopWidth: 0,
+        borderRightWidth: 8,
+        borderBottomWidth: 15,
+        borderLeftWidth: 8,
+        borderTopColor: 'transparent',
+        borderRightColor: 'transparent',
+        borderBottomColor: 'blue',
+        borderLeftColor: 'transparent',
+        marginBottom: -5,
+    },
+    arrowBody: {
+        width: 4,
+        height: 15,
+        backgroundColor: 'blue',
+    },
+});
+
+export default SmoothTrackingMap;

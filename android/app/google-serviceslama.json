@@ -1,0 +1,180 @@
+{
+  "project_info": {
+    "project_number": "600151434965",
+    "firebase_url": "https://gama-87465-default-rtdb.firebaseio.com",
+    "project_id": "gama-87465",
+    "storage_bucket": "gama-87465.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600151434965:android:305fa8d8e3bbc241f8645c",
+        "android_client_info": {
+          "package_name": "com.mygama155.gama155"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "600151434965-um9sqr1obfv56i81e63mrbg0adf6dcio.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mygama155.gama155",
+            "certificate_hash": "5ac49459d5a4264a3d87676ecd3fbc7fe989b204"
+          }
+        },
+        {
+          "client_id": "600151434965-1nebgju0rgc830phj4vh92ipgsvpb48d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmu8rpHckPMW-lfv7vorLf4aF1hCzI2pM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600151434965-1nebgju0rgc830phj4vh92ipgsvpb48d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600151434965:android:c0b22851b2877821f8645c",
+        "android_client_info": {
+          "package_name": "com.mygama155.gama155driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "600151434965-u9r2ce3iugeu4on12238vjluht3abfa9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mygama155.gama155driver",
+            "certificate_hash": "5ac49459d5a4264a3d87676ecd3fbc7fe989b204"
+          }
+        },
+        {
+          "client_id": "600151434965-1nebgju0rgc830phj4vh92ipgsvpb48d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmu8rpHckPMW-lfv7vorLf4aF1hCzI2pM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600151434965-1nebgju0rgc830phj4vh92ipgsvpb48d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600151434965:android:1981e02d2e385b62f8645c",
+        "android_client_info": {
+          "package_name": "com.mygama155.gama155partner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "600151434965-lgf34pl4lbgsavt70qf9hg1vhsprd42p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mygama155.gama155partner",
+            "certificate_hash": "5ac49459d5a4264a3d87676ecd3fbc7fe989b204"
+          }
+        },
+        {
+          "client_id": "600151434965-1nebgju0rgc830phj4vh92ipgsvpb48d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmu8rpHckPMW-lfv7vorLf4aF1hCzI2pM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600151434965-1nebgju0rgc830phj4vh92ipgsvpb48d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600151434965:android:2d5ebf2bc37e8a5bf8645c",
+        "android_client_info": {
+          "package_name": "com.mygama157.gama157"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "600151434965-1nebgju0rgc830phj4vh92ipgsvpb48d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmu8rpHckPMW-lfv7vorLf4aF1hCzI2pM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600151434965-1nebgju0rgc830phj4vh92ipgsvpb48d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600151434965:android:5042d9330ae9af2ff8645c",
+        "android_client_info": {
+          "package_name": "com.mygama157.gama157driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "600151434965-1nebgju0rgc830phj4vh92ipgsvpb48d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmu8rpHckPMW-lfv7vorLf4aF1hCzI2pM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600151434965-1nebgju0rgc830phj4vh92ipgsvpb48d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
