@@ -19,10 +19,12 @@ import { getBanks, isObjectEmpty, userDebit, userTopup } from "../../helpersc";
 import { Picker } from '@react-native-picker/picker';
 import { useTopupTicketStore, useWalletStore } from "../../reducers/wallet";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import withTranslation from '../../hook/withTranslation'
 
 
-const NominalPickView = ({ route }) => {
+const NominalPickView = (props) => {
     const navigation = useNavigation();
+    const { route, t } = props
     const { title } = route.params;
     const go_back = () => {
         navigation.navigate('Wallet');
@@ -74,14 +76,14 @@ const NominalPickView = ({ route }) => {
                 <Icon type={Icons.MaterialIcons} name="arrow-back" color={colors.theme_fg_three} style={{ fontSize: 30 }} />
             </TouchableOpacity>
             <View activeOpacity={1} style={{ width: '85%', alignItems: 'flex-start', justifyContent: 'center' }}>
-                <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: colors.theme_fg_three, fontSize: f_xl, fontFamily: bold }}>Pilih Nominal</Text>
+                <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: colors.theme_fg_three, fontSize: f_xl, fontFamily: bold }}>{t('choose_amount')}</Text>
             </View>
         </View>
         <View style={{ flex: 1 }} >
 
 
             <View style={styles.amountContainer}>
-                <Text style={styles.amountTitle}>Pilih Nominal:</Text>
+                <Text style={styles.amountTitle}>{t('choose_amount')}</Text>
                 <View style={styles.amountButtonsContainer}>
                     {amounts.map((amount) => (
                         <TouchableOpacity
@@ -109,12 +111,12 @@ const NominalPickView = ({ route }) => {
             onPress={handlePayment}
             disabled={!selectedAmount}
         >
-            <Text style={styles.payButtonText}>Topup</Text>
+            <Text style={styles.payButtonText}>{t('topup')}</Text>
         </TouchableOpacity>
     </SafeAreaView>
 }
 
-export default NominalPickView;
+export default withTranslation(NominalPickView);
 
 
 

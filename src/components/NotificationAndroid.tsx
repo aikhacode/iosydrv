@@ -176,4 +176,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NotificationAndroid;
+import withTranslation from '../hook/withTranslation'
+
+export default withTranslation(NotificationAndroid)

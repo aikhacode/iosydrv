@@ -6,8 +6,9 @@ import { mail } from "../config/Constants";
 import DropShadow from "react-native-drop-shadow";
 import Icon, { Icons } from "./Icons";
 import Wooble from "./wooble";
+import withTranslation from '../hook/withTranslation'
 
-export default function WelcomeDriver({ open, msg = 'Yuk, ayo kita kerja !!' }) {
+function WelcomeDriver({ open, msg = 'Yuk, ayo kita kerja !!', t }) {
     const [open_, setOpen_] = useState(open)
     const show = useSharedValue(100)
 
@@ -41,19 +42,21 @@ export default function WelcomeDriver({ open, msg = 'Yuk, ayo kita kerja !!' }) 
                     <Image source={mail} style={{ width: undefined, height: undefined, flex: 1 }} />
 
                 </View>
-                <Text style={{ marginLeft: 10, fontSize: 12 }}>Gama Driver . sekarang</Text>
+                <Text style={{ marginLeft: 10, fontSize: 12 }}>{t('gama_driver_now')}</Text>
                 <Wooble>
                     <Icon type={Icons.MaterialCommunityIcons} name={"bell-badge"} size={16} style={{ marginLeft: 5 }} color={'black'} />
                 </Wooble>
             </View>
         </DropShadow>
         <View>
-            <Text style={{ color: 'black', fontSize: 14, width: '100%', marginTop: 5, marginLeft: 15, fontWeight: 'bold' }}>Gama Driver</Text>
+            <Text style={{ color: 'black', fontSize: 14, width: '100%', marginTop: 5, marginLeft: 15, fontWeight: 'bold' }}>{t('gama_driver')}</Text>
             <Text style={{ color: 'black', fontSize: 14, width: '100%', marginTop: 0, marginLeft: 15 }}>{msg}</Text>
         </View>
 
     </Animated.View> : ''
 }
+
+export default withTranslation(WelcomeDriver)
 
 const styles = StyleSheet.create({
 

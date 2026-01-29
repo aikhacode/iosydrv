@@ -2,8 +2,9 @@ import { StyleSheet, View, Text } from "react-native"
 import { screenHeight } from "../config/Constants"
 import { useEffect } from "react"
 import { useAntrianStore } from "../reducers/zustand"
+import withTranslation from '../hook/withTranslation'
 
-export const AntrianBox = ({ isAntrianRunning, antrianNumber, max }) => {
+export const AntrianBox = ({ isAntrianRunning, antrianNumber, max, t }) => {
     const { lostInPool: lost, setLostInPool, setIsAntrianRunning } = useAntrianStore()
 
 
@@ -23,7 +24,7 @@ export const AntrianBox = ({ isAntrianRunning, antrianNumber, max }) => {
                         marginRight: 10
                     }}>
                         <Text style={{ fontStyle: 'italic', fontWeight: 'bold', marginTop: 10, color: 'black', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-                            {`Antrian ke ${antrianNumber} dari 473 antrian`}
+                            {t('queue_of', { n: antrianNumber, max: 473 })}
 
                         </Text>
                     </View>
@@ -34,3 +35,5 @@ export const AntrianBox = ({ isAntrianRunning, antrianNumber, max }) => {
 
 
 }
+
+export default withTranslation(AntrianBox)

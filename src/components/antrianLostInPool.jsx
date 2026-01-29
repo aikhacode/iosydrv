@@ -1,7 +1,8 @@
 import { StyleSheet, View, Text } from "react-native"
+import withTranslation from '../hook/withTranslation'
 
 
-export const AntrianLostInPool = () => {
+export const AntrianLostInPool = ({ t }) => {
 
 
 
@@ -21,7 +22,7 @@ export const AntrianLostInPool = () => {
                     marginRight: 10
                 }}>
                     <Text style={{ fontStyle: 'italic', fontWeight: 'bold', marginTop: 10, color: 'black', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-                        Anda telah keluar dari pool
+                        {t('lost_in_pool')}
 
                     </Text>
                 </View>
@@ -32,3 +33,5 @@ export const AntrianLostInPool = () => {
 
 
 }
+
+export default withTranslation(AntrianLostInPool)

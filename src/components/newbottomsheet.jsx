@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { View, PanResponder, Animated } from 'react-native';
+import withTranslation from '../hook/withTranslation'
 
 const BottomSheet = ({ children, sliderMinHeight, sliderMaxHeight, isOpen, lockHeight }) => {
     const pan = useRef(new Animated.ValueXY()).current;
@@ -64,4 +65,4 @@ const BottomSheet = ({ children, sliderMinHeight, sliderMaxHeight, isOpen, lockH
     );
 };
 
-export default BottomSheet;
+export default withTranslation(BottomSheet);

@@ -20,6 +20,7 @@ import LottieView from 'lottie-react-native';
 // import { ScrollView } from "react-native-gesture-handler";
 
 const Rating = (props) => {
+  const { t } = props;
   const navigation = useNavigation();
   const route = useRoute();
   const [data, setData] = useState(route.params.data);
@@ -43,9 +44,9 @@ const Rating = (props) => {
         setLoading(false);
         navigate_home();
       })
-      .catch(error => {
+        .catch(error => {
         setLoading(false);
-        alert('Sorry something went wrong')
+        alert(t('sorry_something_went_wrong'))
       });
   }
 
@@ -83,7 +84,7 @@ const Rating = (props) => {
               {data.customer.overall_ratings == 0 ?
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
                   <Icon type={Icons.MaterialIcons} name="star" color={colors.warning} style={{ fontSize: 18 }} />
-                  <Text numberOfLines={1} style={{ color: colors.grey, fontSize: f_xs, fontFamily: regular }}>New</Text>
+                  <Text numberOfLines={1} style={{ color: colors.grey, fontSize: f_xs, fontFamily: regular }}>{t('new_label')}</Text>
                 </View>
                 :
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
@@ -94,9 +95,9 @@ const Rating = (props) => {
             </View>
             <View style={{ margin: 15 }} />
             <View style={{ alignItems: 'center', justifyContent: 'center', margin: 20 }}>
-              <Text numberOfLines={1} style={{ color: colors.theme_fg_two, fontSize: f_xl, fontFamily: bold }}>How was your trip ?</Text>
+              <Text numberOfLines={1} style={{ color: colors.theme_fg_two, fontSize: f_xl, fontFamily: bold }}>{t('how_was_your_trip')}</Text>
               <View style={{ margin: 5 }} />
-              <Text style={{ color: colors.text_grey, fontSize: f_s, fontFamily: regular }}>Give your valuable ratings and feedback to improve our services</Text>
+              <Text style={{ color: colors.text_grey, fontSize: f_s, fontFamily: regular }}>{t('give_ratings_feedback')}</Text>
             </View>
             <RT
               count={star_count}
@@ -107,9 +108,9 @@ const Rating = (props) => {
             />
             <View style={{ margin: 15 }} />
             <View style={{ width: '80%', alignItems: 'flex-start', paddingLeft: 10, justifyContent: 'center', backgroundColor: colors.text_container_bg }}>
-              <TextInput
+                <TextInput
                 secureTextEntry={true}
-                placeholder="Comment"
+                placeholder={t('comment')}
                 placeholderTextColor={colors.grey}
                 style={styles.textinput}
                 multiline={true}
@@ -120,8 +121,8 @@ const Rating = (props) => {
             </View>
             <View style={{ margin: 20 }} />
             {loading == false ?
-              <TouchableOpacity onPress={call_add_rating.bind(this)} activeOpacity={1} style={{ width: '80%', backgroundColor: colors.btn_color, borderRadius: 10, height: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ color: colors.theme_fg_two, fontSize: f_m, color: colors.theme_fg_three, fontFamily: bold }}>Submit</Text>
+                <TouchableOpacity onPress={call_add_rating.bind(this)} activeOpacity={1} style={{ width: '80%', backgroundColor: colors.btn_color, borderRadius: 10, height: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ color: colors.theme_fg_two, fontSize: f_m, color: colors.theme_fg_three, fontFamily: bold }}>{t('submit')}</Text>
               </TouchableOpacity>
               :
               <View style={{ height: 50, width: '90%', alignSelf: 'center' }}>
@@ -165,4 +166,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Rating;
+import withTranslation from '../hook/withTranslation'
+
+export default withTranslation(Rating);

@@ -3,7 +3,7 @@ import { View, TextInput, FlatList, Text, StyleSheet, TouchableOpacity } from 'r
 import debounce from 'lodash/debounce';
 import { GOOGLE_KEY } from '../config/Constants';
 
-const GooglePlacesInput = ({ onPlaceSelected, minLength = 8, apiKey = GOOGLE_KEY, addresText }) => {
+const GooglePlacesInput = ({ onPlaceSelected, minLength = 8, apiKey = GOOGLE_KEY, addresText, t }) => {
     const [query, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const apiKey_ = apiKey ?? GOOGLE_KEY; // Replace with your Google Places API key
@@ -99,12 +99,12 @@ const GooglePlacesInput = ({ onPlaceSelected, minLength = 8, apiKey = GOOGLE_KEY
                 style={styles.input}
                 value={query}
                 onChangeText={handleSetQuery}
-                placeholder="Search for a place..."
+                placeholder={t('search_place')}
                 autoCapitalize="none"
                 autoCorrect={false}
 
             />
-            <TouchableOpacity onPress={() => setQuery('')} activeOpacity={0.5} style={{ position: 'absolute', right: 15, top: 10, backgroundColor: '#fe7743', padding: 10, borderRadius: 10 }}><Text style={{ color: 'white' }}>X</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() => setQuery('')} activeOpacity={0.5} style={{ position: 'absolute', right: 15, top: 10, backgroundColor: '#fe7743', padding: 10, borderRadius: 10 }}><Text style={{ color: 'white' }}>{t('close')}</Text></TouchableOpacity>
             {suggestions.length > 0 && (
                 <FlatList
                     data={suggestions}
@@ -142,4 +142,6 @@ const styles = StyleSheet.create({
     },
 });
 
-export default GooglePlacesInput;
+import withTranslation from '../hook/withTranslation'
+
+export default withTranslation(GooglePlacesInput);

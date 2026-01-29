@@ -37,4 +37,6 @@ const Icon = ({ type, name, color, size = 24, style = {} }) => {
     )
 }
 
-export default Icon
+import withTranslation from '../hook/withTranslation'
+
+export default withTranslation(Icon)

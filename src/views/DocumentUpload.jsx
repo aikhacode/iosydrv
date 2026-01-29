@@ -17,6 +17,7 @@ import DropdownAlert, {
 } from 'react-native-dropdownalert';
 import Icon, { Icons } from '../components/Icons';
 import LottieView from 'lottie-react-native';
+import withTranslation from '../hook/withTranslation'
 
 const options = {
   title: 'Select a photo',
@@ -29,6 +30,7 @@ const options = {
 };
 
 const DocumentUpload = (props) => {
+  const { t } = props;
   const navigation = useNavigation();
   const route = useRoute();
   let alt = useRef(
@@ -108,8 +110,8 @@ const DocumentUpload = (props) => {
       setLoading(false);
       alt({
         type: DropdownAlertType.Error,
-        title: 'Validation error',
-        message: 'Error on while upload try again later',
+        title: t('validation_error'),
+        message: t('upload_error_try_again'),
       });
 
     })
@@ -128,8 +130,8 @@ const DocumentUpload = (props) => {
           setStatus(15);
           alt({
             type: DropdownAlertType.Success,
-            title: 'Success',
-            message: 'Successfully uploaded your document',
+            title: t('success'),
+            message: t('successfully_uploaded_your_document'),
           });
 
         }
@@ -138,8 +140,8 @@ const DocumentUpload = (props) => {
         setLoading(false);
         alt({
           type: DropdownAlertType.Error,
-          title: 'Validation error',
-          message: 'Sorry something went wrong',
+          title: t('validation_error'),
+          message: t('sorry_something_went_wrong'),
         });
 
       });
@@ -150,7 +152,7 @@ const DocumentUpload = (props) => {
       return (
         <View style={{ margin: 10 }}>
           <TouchableOpacity onPress={select_photo.bind(this)} activeOpacity={1} style={{ width: '100%', backgroundColor: colors.btn_color, borderRadius: 10, height: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ color: colors.theme_fg_two, fontSize: f_m, color: colors.theme_fg_three, fontFamily: bold }}>Upload</Text>
+            <Text style={{ color: colors.theme_fg_two, fontSize: f_m, color: colors.theme_fg_three, fontFamily: bold }}>{t('upload')}</Text>
           </TouchableOpacity>
         </View>
       )
@@ -205,4 +207,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, null)(DocumentUpload);
+export default withTranslation(connect(null, null)(DocumentUpload));

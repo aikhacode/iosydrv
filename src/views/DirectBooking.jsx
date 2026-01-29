@@ -6,7 +6,9 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from 'react-redux';
+import withTranslation from '../hook/withTranslation'
 const DirectBooking = (props) => {
+  const { t } = props;
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -15,7 +17,7 @@ const DirectBooking = (props) => {
 
   return (
     <View>
-      <Text>hi</Text>
+      <Text>{t('hi')}</Text>
     </View>
   );
 };
@@ -26,4 +28,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(null,null)(DirectBooking);
+export default withTranslation(connect(null,null)(DirectBooking));

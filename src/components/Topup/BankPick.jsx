@@ -19,10 +19,12 @@ import Icon, { Icons } from '../Icons';
 import { getBanks, isObjectEmpty, userTopup } from "../../helpersc";
 import { Picker } from '@react-native-picker/picker';
 import { useTopupTicketStore, useWalletStore } from "../../reducers/wallet";
+import withTranslation from '../../hook/withTranslation'
 
 
-const BankPickView = ({ route }) => {
+const BankPickView = (props) => {
     const navigation = useNavigation();
+    const { route, t } = props
     const { title } = route.params;
     const go_back = () => {
         navigation.navigate('Wallet');
@@ -89,7 +91,7 @@ const BankPickView = ({ route }) => {
                 <Icon type={Icons.MaterialIcons} name="arrow-back" color={colors.theme_fg_three} style={{ fontSize: 30 }} />
             </TouchableOpacity>
             <View activeOpacity={1} style={{ width: '85%', alignItems: 'flex-start', justifyContent: 'center' }}>
-                <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: colors.theme_fg_three, fontSize: f_xl, fontFamily: bold }}>Pilih Bank</Text>
+                <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: colors.theme_fg_three, fontSize: f_xl, fontFamily: bold }}>{t('choose_bank')}</Text>
             </View>
         </View>
         <View style={{ flex: 1 }} >
@@ -100,14 +102,14 @@ const BankPickView = ({ route }) => {
                 }
                 style={styles.picker}
             >
-                <Picker.Item label="Pilih Bank" value="" />
+                <Picker.Item label={t('choose_bank')} value="" />
                 {banks.map((bank, index) => (
                     <Picker.Item key={index} label={bank.name} value={bank.code} />
                 ))}
             </Picker>
 
             <View style={styles.amountContainer}>
-                <Text style={styles.amountTitle}>Pilih Nominal:</Text>
+                <Text style={styles.amountTitle}>{t('choose_amount')}</Text>
                 <View style={styles.amountButtonsContainer}>
                     {amounts.map((amount) => (
                         <TouchableOpacity
@@ -135,12 +137,12 @@ const BankPickView = ({ route }) => {
             onPress={handlePayment}
             disabled={!selectedBank || !selectedAmount}
         >
-            <Text style={styles.payButtonText}>Topup</Text>
+            <Text style={styles.payButtonText}>{t('topup')}</Text>
         </TouchableOpacity>
     </SafeAreaView>
 }
 
-export default BankPickView;
+export default withTranslation(BankPickView);
 
 
 

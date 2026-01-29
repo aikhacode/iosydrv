@@ -8,6 +8,7 @@ import Icon, { Icons } from "./Icons";
 import Wooble from "./wooble";
 import database from "@react-native-firebase/database";
 import { useBroadcastStore } from "../reducers/zustand";
+import withTranslation from '../hook/withTranslation'
 
 // var Sound = require('react-native-sound');
 
@@ -34,7 +35,7 @@ const playSound = () => {
 };
 
 
-export default function Broadcast() {
+function Broadcast({ t }) {
     const [open_, setOpen_] = useState(false)
     const [msg, setMsg] = useState('Broadcast message')
     const [name, setName] = useState("")
@@ -117,7 +118,7 @@ export default function Broadcast() {
                     <Image source={mail} style={{ width: undefined, height: undefined, flex: 1 }} />
 
                 </View>
-                <Text style={{ marginLeft: 10, fontSize: 12 }}>Gama Driver . sekarang</Text>
+                <Text style={{ marginLeft: 10, fontSize: 12 }}>{t('gama_driver_now')}</Text>
                 <Wooble>
                     <Icon type={Icons.MaterialCommunityIcons} name={"bell-badge"} size={16} style={{ marginLeft: 5 }} color={'black'} />
                 </Wooble>
@@ -130,6 +131,8 @@ export default function Broadcast() {
 
     </Animated.View> : ''
 }
+
+export default withTranslation(Broadcast)
 
 const styles = StyleSheet.create({
 

@@ -1,11 +1,15 @@
-export const FabButton = ({ onPress }) => {
+import withTranslation from '../hook/withTranslation'
+
+export const FabButton = ({ onPress, t }) => {
 
     return (
         <TouchableOpacity
             onPress={onPress}
             style={[styles.fabButton, styles.shadow]}>
-            <Text style={styles.text}>+</Text>
+            <Text style={styles.text}>{t('plus')}</Text>
         </TouchableOpacity>
     );
 
 }
+
+export default withTranslation(FabButton)

@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { View, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import { api_url, prefix, colors } from '../config/Constants';
+import withTranslation from '../hook/withTranslation'
 import { call_update_tol_parkir } from '../helper';
 import { useFormTolParkirStore } from '../reducers/zustand';
 
-const FormTolNParkir = ({ trip_id, permitted }) => {
+const FormTolNParkir = ({ trip_id, permitted, t }) => {
     const [toll, setToll] = useState('');
     const [parking, setParking] = useState('');
     const [loading, setLoading] = useState(false);
@@ -105,8 +106,8 @@ const FormTolNParkir = ({ trip_id, permitted }) => {
     return permitted ? (
         <View style={styles.container}>
 
-            <Text style={styles.heading}>Apakah ada biaya tol dan parkir ?</Text>
-            <Text style={styles.label}>Biaya Tol:</Text>
+            <Text style={styles.heading}>{t('toll_parking_question')}</Text>
+            <Text style={styles.label}>{t('toll_fee')}</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Rp 0"
@@ -114,7 +115,7 @@ const FormTolNParkir = ({ trip_id, permitted }) => {
                 onChangeText={handleTollChange}
                 keyboardType='numeric'
             />
-            <Text style={styles.label}>Biaya Parkir:</Text>
+            <Text style={styles.label}>{t('parking_fee')}</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Rp 0"
@@ -123,8 +124,8 @@ const FormTolNParkir = ({ trip_id, permitted }) => {
                 keyboardType="numeric"
             />
 
-            {/* <TouchableOpacity onPress={handleSubmit.bind(this)} activeOpacity={1} style={{ width: '80%', backgroundColor: '#13a6ff', borderRadius: 10, height: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', margin: 'auto' }}>
-                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold' }}>Simpan</Text>
+                {/* <TouchableOpacity onPress={handleSubmit.bind(this)} activeOpacity={1} style={{ width: '80%', backgroundColor: '#13a6ff', borderRadius: 10, height: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', margin: 'auto' }}>
+                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold' }}>{t('save')}</Text>
             </TouchableOpacity> */}
             {/* <Button title="Submit" onPress={} /> */}
         </View>
@@ -158,4 +159,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default FormTolNParkir;
+export default withTranslation(FormTolNParkir)

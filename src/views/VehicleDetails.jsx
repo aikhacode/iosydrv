@@ -13,6 +13,7 @@ import { useNavigation, CommonActions } from "@react-navigation/native";
 import * as colors from '../assets/css/Colors';
 import Icon, { Icons } from '../components/Icons';
 import { connect } from 'react-redux';
+import withTranslation from '../hook/withTranslation'
 import axios from 'axios';
 import { bold, regular, api_url, vehicle_update, btn_loader, f_xl, f_xs, f_m } from '../config/Constants';
 import DropdownAlert, {
@@ -24,6 +25,7 @@ import VehiclePickFormDefault from "../components/vehicle/vehiclepick";
 import { useRegistrationStore } from "../reducers/zustand";
 
 const VehicleDetails = (props) => {
+    const { t } = props;
     const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
     const [is_enabled, setEnabled] = useState(true);
@@ -67,8 +69,8 @@ const VehicleDetails = (props) => {
                 setLoading(false);
                 alt({
                     type: DropdownAlertType.Error,
-                    title: 'Error',
-                    message: 'Sorry something went wrong',
+                    title: t('error'),
+                    message: t('sorry_something_went_wrong'),
                 });
             });
     }
@@ -89,8 +91,8 @@ const VehicleDetails = (props) => {
             vehicleStore.vehicleType == "" || vehicleStore.vehicleNumber == "") {
             alt({
                 type: DropdownAlertType.Error,
-                title: 'Error',
-                message: 'Please enter all the required fields',
+                title: t('error'),
+                message: t('please_enter_all_required_fields'),
             });
         } else {
             call_vehicle_update();
@@ -112,7 +114,7 @@ const VehicleDetails = (props) => {
             {/* </ScrollView> */}
             {(valid && loading == false) &&
                 <TouchableOpacity activeOpacity={1} onPress={check_validate.bind(this)} style={{ width: '90%', position: 'absolute', bottom: 20, marginLeft: '5%', backgroundColor: colors.btn_color, borderRadius: 10, height: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={{ color: colors.theme_fg_two, fontSize: f_m, color: colors.theme_fg_three, fontFamily: bold }}>Selesai</Text>
+                    <Text style={{ color: colors.theme_fg_two, fontSize: f_m, color: colors.theme_fg_three, fontFamily: bold }}>{t('done')}</Text>
                 </TouchableOpacity>
             }
             {(valid && loading) &&
@@ -155,4 +157,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, null)(VehicleDetails);
+export default withTranslation(connect(mapStateToProps, null)(VehicleDetails));

@@ -12,6 +12,7 @@ import { callBandaraFiturs, get_driver_fiturs, getCurrentLocation, mapDispatchTo
 import Animated, { useAnimatedStyle, withTiming, useSharedValue, } from 'react-native-reanimated';
 import Icon, { Icons } from './Icons';
 import * as colors from "../assets/css/Colors";
+import withTranslation from '../hook/withTranslation'
 
 
 import { Camera, CameraType } from 'react-native-camera-kit';
@@ -26,7 +27,7 @@ const FiturSelector = (props) => {
     const navigation = useNavigation()
     const fiturs = useStore((state) => state.fiturs)
     const setFiturs = useStore((state) => state.setFiturs)
-    const { setOpen } = props
+    const { setOpen, t } = props
     const [isScan, setIsScan] = useState(false)
     const [scannedValue, setScannedValue] = useState('');
     const [permitRenderScan, setPermitRenderScan] = useState(false)
@@ -338,9 +339,9 @@ const FiturSelector = (props) => {
         const ScanButtonPart = memo(({ isAntrianRunning, handleAntrianScan }) => {
             return (
                 <><View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 10 }}>
-                    <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>Antrian</Text>
+                    <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>{t('queue')}</Text>
                     <TouchableOpacity disabled={isAntrianRunning} onPress={() => handleAntrianScan()} activeOpacity={0.5} style={{ width: 60, padding: 8, borderRadius: 8, backgroundColor: isAntrianRunning ? 'gray' : '#40A2E3' }}>
-                        <Text style={{ fontSize: 14, fontWeight: 'regular', color: 'white', textAlign: 'center' }}>{isAntrianRunning ? 'Done' : 'Scan'}</Text>
+                        <Text style={{ fontSize: 14, fontWeight: 'regular', color: 'white', textAlign: 'center' }}>{isAntrianRunning ? t('done') : t('scan')}</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -351,8 +352,8 @@ const FiturSelector = (props) => {
         return (
             <><KeyboardAvoidingView behavior={'padding'} style={{ marginTop: 20, }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ fontSize: 14, fontWeight: 'regular', color: 'black' }}>Penerimaan bid</Text>
-                    <Text style={{ fontSize: 14, fontWeight: 'regular', color: 'black' }}>Penyelesaian trip</Text>
+                    <Text style={{ fontSize: 14, fontWeight: 'regular', color: 'black' }}>{t('bid_acceptance')}</Text>
+                    <Text style={{ fontSize: 14, fontWeight: 'regular', color: 'black' }}>{t('complete_trip')}</Text>
                 </View>
 
 
@@ -375,7 +376,7 @@ const FiturSelector = (props) => {
 
                 {onewayFlag ? null : <View>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 10 }}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>Ketersediaan layanan</Text>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>{t('service_availability')}</Text>
 
                     </View>
 
@@ -454,7 +455,7 @@ const FiturSelector = (props) => {
             <View>
                 <View style={{ borderTopColor: 'gray', borderTopWidth: 0.5, marginTop: 15 }}></View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 10, marginBottom: 10 }}>
-                    <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>One Way Trip</Text>
+                    <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black' }}>{t('one_way_trip')}</Text>
 
                 </View>
                 {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 15 }}>
@@ -469,11 +470,11 @@ const FiturSelector = (props) => {
                     />
                 </View> */}
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 15 }}>
-                    <Text style={{ color: 'black' }}>Setup Tujuan</Text>
-                    <Button title='Setup' onPress={() => navigation.navigate('Oneway')}></Button>
+                    <Text style={{ color: 'black' }}>{t('setup_destination')}</Text>
+                    <Button title={t('setup')} onPress={() => navigation.navigate('Oneway')}></Button>
                 </View>
                 <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 0, marginBottom: 10 }}>
-                    <Text style={{ fontSize: 12, fontWeight: 'regular', color: 'black', fontStyle: 'italic', textAlign: 'left' }}>Kuota sehari 2x</Text>
+                    <Text style={{ fontSize: 12, fontWeight: 'regular', color: 'black', fontStyle: 'italic', textAlign: 'left' }}>{t('daily_quota_2x')}</Text>
 
                 </View>
             </View>
@@ -511,7 +512,7 @@ const FiturSelector = (props) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(FiturSelector);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation(FiturSelector));
 
 
 const styles = StyleSheet.create({

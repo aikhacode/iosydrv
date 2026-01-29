@@ -23,6 +23,7 @@ import ImgToBase64 from 'react-native-image-base64';
 import { updateFirstName, updateLastName, updateEmail } from '../actions/RegisterActions';
 import { connect } from 'react-redux';
 import { useProfileStore } from "../reducers/zustand";
+import withTranslation from '../hook/withTranslation'
 
 const options = {
     title: 'Select a photo',
@@ -35,6 +36,7 @@ const options = {
 };
 
 const Profile = (props) => {
+    const { t } = props;
     const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
     const [on_load, setOnLoad] = useState(0);
@@ -74,7 +76,7 @@ const Profile = (props) => {
             })
             .catch(error => {
                 setLoading(false);
-                alert('Sorry something went wrong')
+                alert(t('sorry_something_went_wrong'))
             });
     }
 
@@ -116,7 +118,7 @@ const Profile = (props) => {
             }
         }).catch((err) => {
             setLoading(false);
-            alert('Error on while upload try again later.')
+            alert(t('upload_error_try_again'))
         })
     }
 
@@ -129,8 +131,8 @@ const Profile = (props) => {
         })
             .then(async response => {
                 setLoading(false);
-                if (response.data.status == 1) {
-                    alert("Your Profile Picture Update Successfully")
+                    if (response.data.status == 1) {
+                    alert(t('profile_picture_update_success'))
                     call_get_profile();
                 } else {
                     alert(response.data.message)
@@ -138,7 +140,7 @@ const Profile = (props) => {
             })
             .catch(error => {
                 setLoading(false);
-                alert("Sorry something went wrong")
+                alert(t('sorry_something_went_wrong'))
             });
     }
 
@@ -255,7 +257,7 @@ const Profile = (props) => {
                     <Icon type={Icons.MaterialIcons} name="arrow-back" color={colors.theme_fg_three} style={{ fontSize: 30 }} />
                 </TouchableOpacity>
                 <View activeOpacity={1} style={{ width: '85%', alignItems: 'flex-start', justifyContent: 'center' }}>
-                    <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: colors.theme_fg_three, fontSize: f_xl, fontFamily: bold }}>Edit Profile</Text>
+                    <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: colors.theme_fg_three, fontSize: f_xl, fontFamily: bold }}>{t('edit_profile')}</Text>
                 </View>
             </View>
             <ScrollView>
@@ -268,9 +270,9 @@ const Profile = (props) => {
                         </TouchableOpacity>
                         <ScrollView>
                             <View style={{ alignItems: 'center' }}>
-                                <Text style={{ color: colors.theme_fg_two, fontSize: f_xl, fontFamily: bold }}>Informasi data diri</Text>
-                                <Text style={{ marginTop: 8, color: colors.theme_fg_two, fontSize: f_xs, fontFamily: regular }}>Foto setengah badan, tanpa kacamata. </Text>
-                                <Text style={{ marginTop: 8, color: 'red', fontSize: f_xs, fontFamily: regular, fontWeight: 'bold', }}>Perubahan data profile atas persetujuan admin</Text>
+                                <Text style={{ color: colors.theme_fg_two, fontSize: f_xl, fontFamily: bold }}>{t('personal_info')}</Text>
+                                <Text style={{ marginTop: 8, color: colors.theme_fg_two, fontSize: f_xs, fontFamily: regular }}>{t('photo_instruction')}</Text>
+                                <Text style={{ marginTop: 8, color: 'red', fontSize: f_xs, fontFamily: regular, fontWeight: 'bold', }}>{t('profile_changes_notice')}</Text>
 
                                 <View style={{ margin: 20 }} />
                                 <View style={{ width: '90%' }}>
@@ -313,4 +315,4 @@ const mapDispatchToProps = (dispatch) => ({
     updateLastName: (data) => dispatch(updateLastName(data)),
 });
 
-export default connect(null, mapDispatchToProps)(Profile);
+export default withTranslation(connect(null, mapDispatchToProps)(Profile));

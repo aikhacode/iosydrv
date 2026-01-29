@@ -25,9 +25,11 @@ import DropdownAlert, {
 } from 'react-native-dropdownalert';
 import Animated, { useAnimatedStyle, withTiming, useSharedValue } from 'react-native-reanimated';
 import { formatCurrency, getItemLayout } from "../helper";
+import withTranslation from '../hook/withTranslation'
 
 const Bookings = (props) => {
     const navigation = useNavigation();
+    const { t } = props;
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const [filter, setFilter] = useState(1);
@@ -80,7 +82,7 @@ const Bookings = (props) => {
             })
             .catch(error => {
                 setLoading(false);
-                alert('Sorry something went wrong')
+                alert(t('sorry_something_went_wrong'))
             }).finally(() => {
                 setLoading(false)
             })
@@ -95,8 +97,8 @@ const Bookings = (props) => {
         } else if (filter == 3) {
             alt({
                 type: DropdownAlertType.Error,
-                title: 'Error',
-                message: 'This trip is' + ' ' + status_name,
+                title: t('error'),
+                message: t('this_trip_is', { status: status_name }),
             });
 
         }
@@ -179,12 +181,12 @@ const Bookings = (props) => {
                                 </View>
                             </View> */}
                             <View style={{ width: '25%', alignItems: 'center', justifyContent: 'center' }}>
-                                <Text style={{ color: colors.theme_fg_two, fontSize: f_xs, fontFamily: normal }}>Fare</Text>
+                                <Text style={{ color: colors.theme_fg_two, fontSize: f_xs, fontFamily: normal }}>{t('fare')}</Text>
                                 <View style={{ margin: 3 }} />
                                 <Text style={{ fontSize: f_xs, fontFamily: bold, color: colors.theme_fg_two }}>{formatCurrency(getTotalFare(item))}</Text>
                             </View>
                             <View style={{ width: '25%', alignItems: 'center', justifyContent: 'center' }}>
-                                <Text style={{ color: colors.theme_fg_two, fontSize: f_xs, fontFamily: normal }}>Distance</Text>
+                                <Text style={{ color: colors.theme_fg_two, fontSize: f_xs, fontFamily: normal }}>{t('distance')}</Text>
                                 <View style={{ margin: 3 }} />
                                 <Text style={{ color: colors.theme_fg_two, fontSize: f_xs, fontFamily: bold }}>{item.distance} km</Text>
                             </View>
@@ -195,7 +197,7 @@ const Bookings = (props) => {
                             </View>
                             <View style={{ width: '25%', alignItems: 'center', justifyContent: 'center' }}>
                                 <TouchableOpacity onPress={navigate.bind(this, item.id, item.status_name)} activeOpacity={0.5} style={{ marginLeft: '10%', backgroundColor: colors.btn_color, borderRadius: 7, alignItems: 'center', justifyContent: 'center', padding: 8 }}>
-                                    <Text style={{ color: 'white', fontSize: f_xs }}>Details</Text>
+                                    <Text style={{ color: 'white', fontSize: f_xs }}>{t('details')}</Text>
 
                                 </TouchableOpacity>
                             </View>
@@ -231,7 +233,7 @@ const Bookings = (props) => {
                 <View style={[styles.header]}>
                     <View style={{ width: '5%' }} />
                     <TouchableOpacity activeOpacity={1} onPress={navigate_home.bind(this)} style={{ width: '85%', alignItems: 'flex-start', justifyContent: 'center' }}>
-                        <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: colors.theme_fg_two, fontSize: f_xl, fontFamily: bold }}>My Rides</Text>
+            <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: colors.theme_fg_two, fontSize: f_xl, fontFamily: bold }}>{t('my_rides')}</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ alignItems: 'center', margin: 10 }}>
@@ -251,13 +253,13 @@ const Bookings = (props) => {
                     >
                         <View style={{ flexDirection: 'row', backgroundColor: colors.theme_bg_three, borderRadius: 10 }}>
                             <TouchableOpacity onPress={change_filter.bind(this, 1)} style={[filter == 1 ? styles.segment_active_bg : styles.segment_inactive_bg]}>
-                                <Text style={[filter == 1 ? styles.segment_active_fg : styles.segment_inactive_fg]}>Ongoing</Text>
+                                <Text style={[filter == 1 ? styles.segment_active_fg : styles.segment_inactive_fg]}>{t('ongoing')}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={change_filter.bind(this, 2)} style={[filter == 2 ? styles.segment_active_bg : styles.segment_inactive_bg]}>
-                                <Text style={[filter == 2 ? styles.segment_active_fg : styles.segment_inactive_fg]}>Completed</Text>
+                                <Text style={[filter == 2 ? styles.segment_active_fg : styles.segment_inactive_fg]}>{t('completed')}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={change_filter.bind(this, 3)} style={[filter == 3 ? styles.segment_active_bg : styles.segment_inactive_bg]}>
-                                <Text style={[filter == 3 ? styles.segment_active_fg : styles.segment_inactive_fg]}>Cancelled</Text>
+                                <Text style={[filter == 3 ? styles.segment_active_fg : styles.segment_inactive_fg]}>{t('cancelled')}</Text>
                             </TouchableOpacity>
                         </View>
                     </DropShadow>
@@ -311,4 +313,4 @@ const styles = StyleSheet.create({
     segment_inactive_fg: { color: colors.theme_fg_two, fontSize: 12, fontFamily: normal, color: colors.theme_fg_two }
 });
 
-export default Bookings;
+export default withTranslation(Bookings);

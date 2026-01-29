@@ -7,8 +7,10 @@ import { api_url_driver } from "../../config/Constants"
 import { getAddress } from "../../helper"
 import axios from "axios"
 import { useOnewayDashboardStore } from "../../reducers/zustand"
+import withTranslation from '../../hook/withTranslation'
 
-const OnewayDashboard = () => {
+const OnewayDashboard = (props) => {
+    const { t } = props
     const navigation = useNavigation()
     const [addressFromGPS, setAddressFromGPS] = useState('')
     const isFocused = useIsFocused()
@@ -104,16 +106,16 @@ const OnewayDashboard = () => {
             <BottomSheetView style={styles2.contentContainer} >
 
                 <View style={{ width: '90%', }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'black' }}>One Way Trip</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'black' }}>{t('one_way_trip')}</Text>
                     <Text style={{ color: 'black', width: '90%' }}>{addressFromGPS}</Text>
                     <View style={{ width: '100%', flexDirection: 'row', gap: 20, marginTop: 15 }}>
                         <TouchableOpacity onPress={handleEdit} activeOpacity={0.5} style=
                             {{ width: '20%', widthmarginTop: 10, height: 35, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.btn_color, borderRadius: 8 }}>
-                            <Text style={{ color: colors.theme_fg_three }}>Edit</Text>
+                            <Text style={{ color: colors.theme_fg_three }}>{t('edit')}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={handleOff} activeOpacity={0.5} style=
                             {{ width: '20%', widthmarginTop: 10, height: 35, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.btn_color, borderRadius: 8 }}>
-                            <Text style={{ color: colors.theme_fg_three }}>Off</Text>
+                            <Text style={{ color: colors.theme_fg_three }}>{t('off')}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -136,4 +138,4 @@ const styles2 = StyleSheet.create({
     },
 });
 
-export default OnewayDashboard;
+export default withTranslation(OnewayDashboard);

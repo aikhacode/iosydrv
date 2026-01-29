@@ -1,4 +1,5 @@
 import { Pressable } from "react-native";
+import withTranslation from '../hook/withTranslation'
 
 const TouchableOpacity = (props) => {
     return (
@@ -8,4 +9,4 @@ const TouchableOpacity = (props) => {
     );
 };
 
-export default TouchableOpacity;
+export default withTranslation(TouchableOpacity);

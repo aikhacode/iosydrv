@@ -18,8 +18,10 @@ import DropdownAlert, {
 } from 'react-native-dropdownalert';
 import axios from 'axios';
 import LottieView from 'lottie-react-native';
+import withTranslation from '../hook/withTranslation'
 
 const EditPlatNo = (props) => {
+    const { t } = props;
     const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
@@ -67,8 +69,8 @@ const EditPlatNo = (props) => {
                 setLoading(false);
                 alt({
                     type: DropdownAlertType.Success,
-                    title: 'Successfully send',
-                    message: 'Your plat nomer has been sent. Please wait for admin approval.',
+                    title: t('success'),
+                    message: t('plat_sent_wait_admin'),
                 });
 
                 go_back();
@@ -92,9 +94,9 @@ const EditPlatNo = (props) => {
             </View>
             <View style={{ margin: 20 }} />
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                <Text numberOfLines={1} style={{ color: colors.theme_fg_two, fontSize: f_xl, fontFamily: bold }}>Masukan Plat Nomer</Text>
+                <Text numberOfLines={1} style={{ color: colors.theme_fg_two, fontSize: f_xl, fontFamily: bold }}>{t('enter_plate_number')}</Text>
                 <View style={{ margin: 5 }} />
-                <Text numberOfLines={1} style={{ color: colors.grey, fontSize: f_xs, fontFamily: normal }}>Kendaraan kamu</Text>
+                <Text numberOfLines={1} style={{ color: colors.grey, fontSize: f_xs, fontFamily: normal }}>{t('your_vehicle')}</Text>
                 <View style={{ margin: 20 }} />
                 <View style={{ width: '80%' }}>
                     <View style={{ flexDirection: 'row' }}>
@@ -102,10 +104,10 @@ const EditPlatNo = (props) => {
                             <Icon type={Icons.MaterialCommunityIcons} name="account-edit" color={colors.theme_fg_two} style={{ fontSize: 30 }} />
                         </View>
                         <View style={{ width: '75%', alignItems: 'flex-start', paddingLeft: 10, justifyContent: 'center', backgroundColor: colors.text_container_bg }}>
-                            <TextInput
+                                <TextInput
                                 ref={inputRef}
                                 secureTextEntry={false}
-                                placeholder="Plat Nomermu"
+                                placeholder={t('your_plate_placeholder')}
                                 placeholderTextColor={colors.grey}
                                 style={styles.textinput}
                                 onChangeText={TextInputValue =>
@@ -116,7 +118,7 @@ const EditPlatNo = (props) => {
                     <View style={{ margin: 30 }} />
                     {loading == false ?
                         <TouchableOpacity onPress={check_valid.bind(this)} activeOpacity={1} style={{ width: '100%', backgroundColor: colors.btn_color, borderRadius: 10, height: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ color: colors.theme_fg_two, fontSize: f_m, color: colors.theme_fg_three, fontFamily: bold }}>Done</Text>
+                            <Text style={{ color: colors.theme_fg_two, fontSize: f_m, color: colors.theme_fg_three, fontFamily: bold }}>{t('done')}</Text>
                         </TouchableOpacity>
                         :
                         <View style={{ height: 50, width: '90%', alignSelf: 'center' }}>
@@ -148,4 +150,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default EditPlatNo;
+export default withTranslation(EditPlatNo);

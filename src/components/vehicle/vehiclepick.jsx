@@ -11,6 +11,7 @@ import {
 import { useNavigation, CommonActions } from "@react-navigation/native";
 import * as colors from '../../assets/css/Colors';
 import Icon, { Icons } from '../../components/Icons';
+import withTranslation from '../../hook/withTranslation'
 import { connect } from 'react-redux';
 import { Checkbox } from 'react-native-paper';
 
@@ -20,6 +21,7 @@ import { useRegistrationStore } from "../../reducers/zustand";
 
 
 const VehiclePickFormDefault = (props) => {
+    const { t } = props
 
     const navigation = useNavigation()
     const navigate = (route) => {
@@ -35,7 +37,7 @@ const VehiclePickFormDefault = (props) => {
         return (
             <View style={{ width: '90%' }}>
                 <View style={{ marginBottom: 20 }}>
-                    <Text style={{ color: colors.text_grey, fontSize: f_xs, fontFamily: bold }}>Merk Kendaraan</Text>
+                    <Text style={{ color: colors.text_grey, fontSize: f_xs, fontFamily: bold }}>{t('vehicle_brand')}</Text>
                     <View style={{ margin: 5 }} />
                     <TouchableOpacity activeOpacity={1} onPress={navigate.bind(this, 'CreateVehicleBrand')} style={{ flexDirection: 'row' }}>
                         <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center', backgroundColor: colors.theme_bg_three }}>
@@ -47,13 +49,13 @@ const VehiclePickFormDefault = (props) => {
                                 value={vehicleBrand}
                                 placeholderTextColor={colors.grey}
                                 style={styles.textinput}
-                                placeholder="Merk Kendaraan"
+                                placeholder={t('vehicle_brand')}
                             />
                         </View>
                     </TouchableOpacity>
                 </View>
                 <View style={{ marginBottom: 20 }}>
-                    <Text style={{ color: colors.text_grey, fontSize: f_xs, fontFamily: bold }}>Tipe Kendaraan</Text>
+                    <Text style={{ color: colors.text_grey, fontSize: f_xs, fontFamily: bold }}>{t('vehicle_type')}</Text>
                     <View style={{ margin: 5 }} />
                     <TouchableOpacity activeOpacity={1} onPress={navigate.bind(this, 'CreateVehicleName')} style={{ flexDirection: 'row' }}>
                         <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center', backgroundColor: colors.theme_bg_three }}>
@@ -65,14 +67,14 @@ const VehiclePickFormDefault = (props) => {
                                 value={vehicleName}
                                 placeholderTextColor={colors.grey}
                                 style={styles.textinput}
-                                placeholder="Tipe Kendaraan"
+                                placeholder={t('vehicle_type')}
                             />
                         </View>
                     </TouchableOpacity>
                 </View>
 
                 <View style={{ marginBottom: 20 }}>
-                    <Text style={{ color: colors.text_grey, fontSize: f_xs, fontFamily: bold }}>Warna Kendaraan</Text>
+                    <Text style={{ color: colors.text_grey, fontSize: f_xs, fontFamily: bold }}>{t('vehicle_color')}</Text>
                     <View style={{ margin: 5 }} />
                     <TouchableOpacity activeOpacity={1} onPress={navigate.bind(this, 'CreateVehicleColor')} style={{ flexDirection: 'row' }}>
                         <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center', backgroundColor: colors.theme_bg_three }}>
@@ -84,13 +86,13 @@ const VehiclePickFormDefault = (props) => {
                                 value={vehicleColor}
                                 placeholderTextColor={colors.grey}
                                 style={styles.textinput}
-                                placeholder="Warna Kendaraan"
+                                placeholder={t('vehicle_color')}
                             />
                         </View>
                     </TouchableOpacity>
                 </View>
                 <View style={{ marginBottom: 20 }}>
-                    <Text style={{ color: colors.text_grey, fontSize: f_xs, fontFamily: bold }}>Nopol</Text>
+                    <Text style={{ color: colors.text_grey, fontSize: f_xs, fontFamily: bold }}>{t('vehicle_number_plate')}</Text>
                     <View style={{ margin: 5 }} />
                     <TouchableOpacity activeOpacity={1} onPress={navigate.bind(this, 'CreateVehicleNumber')} style={{ flexDirection: 'row' }}>
                         <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center', backgroundColor: colors.theme_bg_three }}>
@@ -102,13 +104,13 @@ const VehiclePickFormDefault = (props) => {
                                 value={vehicleNumber}
                                 placeholderTextColor={colors.grey}
                                 style={styles.textinput}
-                                placeholder="Nopol"
+                                placeholder={t('vehicle_number_plate')}
                             />
                         </View>
                     </TouchableOpacity>
                 </View>
                 <View style={{ marginBottom: 20 }}>
-                    <Text style={{ color: colors.text_grey, fontSize: f_xs, fontFamily: bold }}>Fitur Layanan</Text>
+                    <Text style={{ color: colors.text_grey, fontSize: f_xs, fontFamily: bold }}>{t('service_features')}</Text>
                     <View style={{ margin: 5 }} />
                     <TouchableOpacity activeOpacity={1} onPress={navigate.bind(this, 'CreateVehicleType')} style={{ flexDirection: 'row' }}>
                         <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center', backgroundColor: colors.theme_bg_three }}>
@@ -120,7 +122,7 @@ const VehiclePickFormDefault = (props) => {
                                 value={vehicleFiturLbl}
                                 placeholderTextColor={colors.grey}
                                 style={styles.textinput}
-                                placeholder="fitur layanan"
+                                placeholder={t('service_features')}
                             />
                         </View>
                     </TouchableOpacity>
@@ -192,7 +194,7 @@ const VehiclePickFormDefault = (props) => {
                 />
                 <TouchableOpacity activeOpacity={0.2} onPress={nextFLow.bind(this)} style={{ marginLeft: 0, backgroundColor: colors.btn_color, borderRadius: 10, height: 50, alignItems: 'center', justifyContent: 'center', marginRight: 0, marginTop: 20 }}
                 >
-                    <Text style={{ color: colors.theme_fg_two, fontSize: f_m, color: colors.theme_fg_three, fontFamily: bold }}>Next</Text>
+                    <Text style={{ color: colors.theme_fg_two, fontSize: f_m, color: colors.theme_fg_three, fontFamily: bold }}>{t('next')}</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -252,7 +254,7 @@ const VehiclePickFormDefault = (props) => {
 
     return (
         <View style={{ alignItems: 'center', flex: 1 }}>
-            <Text style={{ color: colors.theme_fg_two, fontSize: f_xl, fontFamily: bold }}>Tambah Kendaraan </Text>
+            <Text style={{ color: colors.theme_fg_two, fontSize: f_xl, fontFamily: bold }}>{t('add_vehicle')}</Text>
             <View style={{ margin: 20 }} />
             {!props.valid ? <VehicleMainType /> : <VehicleInputContainer />}
 
@@ -318,4 +320,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(VehiclePickFormDefault)
+export default withTranslation(connect(mapStateToProps, mapDispatchToProps)(VehiclePickFormDefault))

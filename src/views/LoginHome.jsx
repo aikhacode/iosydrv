@@ -6,6 +6,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { connect } from 'react-redux';
+import withTranslation from '../hook/withTranslation'
 const LoginHome = (props) => {
   const navigation = useNavigation();
 
@@ -26,4 +27,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(null,null)(LoginHome);
+export default withTranslation(connect(null,null)(LoginHome));

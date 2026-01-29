@@ -10,9 +10,11 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import * as colors from '../assets/css/Colors';
 import { screenHeight, screenWidth, normal, f_s  } from '../config/Constants';
+import withTranslation from '../hook/withTranslation'
 
 const MyRentalRides = (props) => {
   const navigation = useNavigation();
+  const { t } = props;
 
   const go_back = () => {
     navigation.goBack();
@@ -26,9 +28,9 @@ const MyRentalRides = (props) => {
       <View style={[styles.header]}>
     
       </View>
-      <ScrollView>
-      <Text numberOfLines={1} style={{ color: colors.theme_fg_two, fontSize: f_s, fontFamily: normal }}>In Process...</Text>
-      </ScrollView>
+  <ScrollView>
+  <Text numberOfLines={1} style={{ color: colors.theme_fg_two, fontSize: f_s, fontFamily: normal }}>{t('in_process')}</Text>
+  </ScrollView>
     </SafeAreaView>
   );
 };
@@ -48,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyRentalRides;
+export default withTranslation(MyRentalRides);

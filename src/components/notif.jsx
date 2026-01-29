@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import Animated, { useAnimatedStyle, withTiming, useSharedValue, FadeIn, FadeOut } from 'react-native-reanimated';
 import { isMoment } from 'moment';
 import DropShadow from 'react-native-drop-shadow';
+import withTranslation from '../hook/withTranslation'
 
 const Notif = ({ setOpen, ismodal = false, children }) => {
     const slide = useSharedValue(300)
@@ -129,7 +130,7 @@ const Notif = ({ setOpen, ismodal = false, children }) => {
 }
 
 
-export default Notif;
+export default withTranslation(Notif);
 
 
 const styles = StyleSheet.create({

@@ -8,12 +8,13 @@ import Animated, {
     withRepeat,
     withSequence,
 } from 'react-native-reanimated';
+import withTranslation from '../hook/withTranslation'
 
 const ANGLE = 10;
 const TIME = 100;
 const EASING = Easing.elastic(1.5);
 
-export default function Wooble({ children, viewstyle }) {
+function Wooble({ children, viewstyle }) {
     const rotation = useSharedValue(0);
 
     const animatedStyle = useAnimatedStyle(() => ({
@@ -66,3 +67,5 @@ const styles = StyleSheet.create({
         marginBottom: 30,
     },
 });
+
+export default withTranslation(Wooble)

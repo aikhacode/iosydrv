@@ -18,8 +18,10 @@ import DropdownAlert, {
 } from 'react-native-dropdownalert';
 import axios from 'axios';
 import LottieView from 'lottie-react-native';
+import withTranslation from '../hook/withTranslation'
 
 const EditLastName = (props) => {
+    const { t } = props;
     const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
     const [last_name, setLastName] = useState('');
@@ -155,4 +157,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default EditLastName;
+export default withTranslation(EditLastName);

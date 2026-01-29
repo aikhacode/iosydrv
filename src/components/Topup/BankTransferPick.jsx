@@ -21,9 +21,12 @@ import { Picker } from '@react-native-picker/picker';
 import { useTopupTicketStore, useWalletStore } from "../../reducers/wallet";
 import { useTransferStore } from "../../reducers/zustand";
 
+import withTranslation from '../../hook/withTranslation'
 
-const BankTransferPickView = ({ route }) => {
+
+const BankTransferPickView = (props) => {
     const navigation = useNavigation();
+    const { route, t } = props
     const { title } = route.params;
     const go_back = () => {
         navigation.navigate('Wallet');
@@ -130,11 +133,11 @@ const BankTransferPickView = ({ route }) => {
                 <Icon type={Icons.MaterialIcons} name="arrow-back" color={colors.theme_fg_three} style={{ fontSize: 30 }} />
             </TouchableOpacity>
             <View activeOpacity={1} style={{ width: '85%', alignItems: 'flex-start', justifyContent: 'center' }}>
-                <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: colors.theme_fg_three, fontSize: f_xl, fontFamily: bold }}>Transfer Bank</Text>
+                <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: colors.theme_fg_three, fontSize: f_xl, fontFamily: bold }}>{t('bank_transfer')}</Text>
             </View>
         </View>
         <View style={{ flex: 1, width: '100%', padding: 15 }} >
-            <Text style={styles.amountTitle}>Input Bank</Text>
+            <Text style={styles.amountTitle}>{t('input_bank')}</Text>
             <Picker
                 selectedValue={selectedBank}
                 onValueChange={(itemValue, itemIndex) => {
@@ -144,18 +147,17 @@ const BankTransferPickView = ({ route }) => {
                 }
                 style={styles.picker}
             >
-                <Picker.Item label="Pilih Bank" value="" />
+                <Picker.Item label={t('choose_bank')} value="" />
                 {banks.map((bank, index) => (
                     <Picker.Item key={index} label={`${bank.name}   (${bank.code})`} value={bank} />
                 ))}
             </Picker>
-
             <View style={styles.amountContainer}>
-                <Text style={styles.amountTitle}>Input Nama Pemegang Rekening:</Text>
+                <Text style={styles.amountTitle}>{t('input_account_name')}</Text>
                 <View style={styles.amountButtonsContainer}>
                     <TextInput
 
-                        placeholder="Bank Account Name"
+                        placeholder={t('bank_account_name_placeholder')}
                         value={selectedName}
                         onChangeText={setSelectedName}
                         style={styles.textinput}
@@ -164,10 +166,10 @@ const BankTransferPickView = ({ route }) => {
             </View>
 
             <View style={styles.amountContainer}>
-                <Text style={styles.amountTitle}>Input No Rekening:</Text>
+                <Text style={styles.amountTitle}>{t('input_account_number')}</Text>
                 <View style={styles.amountButtonsContainer}>
                     <TextInput
-                        placeholder="Bank Account Number"
+                        placeholder={t('bank_account_number_placeholder')}
                         value={selectedNumber}
                         onChangeText={setSelectedNumber}
                         style={styles.textinput}
@@ -177,10 +179,10 @@ const BankTransferPickView = ({ route }) => {
             </View>
 
             <View style={styles.amountContainer}>
-                <Text style={styles.amountTitle}>Input Nominal:</Text>
+                <Text style={styles.amountTitle}>{t('input_amount')}</Text>
                 <View style={styles.amountButtonsContainer}>
                     <TextInput
-                        placeholder="Nominal"
+                        placeholder={t('nominal_placeholder')}
                         keyboardType="numeric"
                         style={styles.textinput}
                         value={selectedAmount}
@@ -197,12 +199,12 @@ const BankTransferPickView = ({ route }) => {
             onPress={handlePayment}
             disabled={selectedBank === '' || selectedAmount === '' || selectedName === '' || selectedNumber === ''}
         >
-            <Text style={styles.payButtonText}>Transfer</Text>
+            <Text style={styles.payButtonText}>{t('transfer')}</Text>
         </TouchableOpacity>
     </SafeAreaView>
 }
 
-export default BankTransferPickView;
+export default withTranslation(BankTransferPickView);
 
 
 

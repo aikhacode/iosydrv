@@ -18,11 +18,13 @@ import Icon, { Icons } from '../Icons';
 import { useTopupTicketStore } from "../../reducers/wallet";
 import { isObjectEmpty } from "../../helpersc";
 import { formatCurrency } from "../../helper";
+import withTranslation from '../../hook/withTranslation'
 
 
-const TopupDetailView = ({ route }) => {
+const TopupDetailView = (props) => {
     const navigation = useNavigation();
-    const { data, title } = route.params;
+    const { data, title } = props.route.params;
+    const { t } = props
     const { dataTopup, setDataTopup } = useTopupTicketStore()
     const [detailData, setDetailData] = useState([])
     const go_back = () => {
@@ -33,23 +35,23 @@ const TopupDetailView = ({ route }) => {
         if (!isObjectEmpty(dataTopup)) {
             setDetailData([
                 {
-                    label: 'Request Time',
+                    label: t('request_time'),
                     value: dataTopup.requestTime
                 },
                 {
-                    label: 'Expired Time',
+                    label: t('expired_time'),
                     value: dataTopup.expiredTime
                 },
                 {
-                    label: 'Bank',
+                    label: t('bank'),
                     value: dataTopup.bank
                 },
                 {
-                    label: 'Nama Rekening',
+                    label: t('account_name'),
                     value: dataTopup.beneficiaryAccountName
                 },
                 {
-                    label: 'Nomor Rekening',
+                    label: t('account_number'),
                     value: dataTopup.beneficiaryAccountNumber
                 },
                 // {
@@ -57,7 +59,7 @@ const TopupDetailView = ({ route }) => {
                 //     value: formatCurrency(dataTopup.amount)
                 // },
                 {
-                    label: 'Deskripsi',
+                    label: t('description'),
                     value: dataTopup.description
                 }
             ])
@@ -93,7 +95,7 @@ const TopupDetailView = ({ route }) => {
     </SafeAreaView>
 }
 
-export default TopupDetailView;
+export default withTranslation(TopupDetailView);
 
 
 

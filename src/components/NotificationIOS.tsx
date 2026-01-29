@@ -101,4 +101,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NotificationIOS;
+import withTranslation from '../hook/withTranslation'
+
+export default withTranslation(NotificationIOS)

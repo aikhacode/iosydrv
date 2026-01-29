@@ -41,12 +41,14 @@ import MapViewDirections from "react-native-maps-directions";
 import useGeolocation from "../components/map/useGeoLocation";
 import { shallow } from "zustand/shallow";
 // import BottomSheet from "../components/newbottomsheet";
+import withTranslation from '../hook/withTranslation'
 
 
 
 
 
 const Trip = (props) => {
+  const { t } = props;
   const navigation = useNavigation();
   const route = useRoute();
   let alt = useRef(
@@ -889,4 +891,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(Trip);
+export default withTranslation(connect(mapStateToProps, null)(Trip));

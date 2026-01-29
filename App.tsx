@@ -76,6 +76,7 @@ import { useGlobalStore } from './src/reducers/zustand';
 import Safety from './src/views/Safety';
 import Mails from './src/views/Mail';
 import WithIcon from './src/components/withIcon';
+import LanguageProvider from './src/hook/LanguageProvider'
 import WebRender from './src/views/WebRender';
 import TopupDetailView from './src/components/Topup/TopupDetailView';
 import BankPickView from './src/components/Topup/BankPick';
@@ -207,8 +208,9 @@ const Stack = createStackNavigator();
 function App() {
 
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
+    <LanguageProvider>
+      <SafeAreaProvider>
+        <NavigationContainer>
         <Stack.Navigator initialRouteName="Splash" screenOptions={({ route, navigation }) => ({
           ...TransitionPresets.SlideFromRightIOS,
         })} options={{ headerShown: false }}  >
@@ -293,8 +295,9 @@ function App() {
           <Stack.Screen name="Oneway" component={OnewayComponent} options={{ headerShown: false }} />
           <Stack.Screen name="MailBody" component={MailBody} options={{ headerShown: false }} />
         </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </LanguageProvider>
   );
 }
 

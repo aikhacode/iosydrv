@@ -14,6 +14,7 @@ import {
 import { useNavigation, CommonActions, useIsFocused } from "@react-navigation/native";
 import * as colors from '../assets/css/Colors';
 import Icon, { Icons } from '../components/Icons';
+import withTranslation from '../hook/withTranslation';
 import { normal, bold, my_bookings, api_url, img_url, loader, no_data_loader, cancel, f_s, f_xs, f_tiny, f_xl, screenHeight } from '../config/Constants';
 import DropShadow from "react-native-drop-shadow";
 import { Badge } from 'react-native-paper';
@@ -31,6 +32,7 @@ import WelcomeDriver from "../components/welcomedriver";
 import { useBroadcastStore } from "../reducers/zustand";
 
 const Mails = (props) => {
+    const { t } = props;
     const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
@@ -102,8 +104,8 @@ const Mails = (props) => {
                 // alert('Sorry something went wrong')
                 alt({
                     type: DropdownAlertType.Error,
-                    title: 'Error',
-                    message: 'Pesan gagal loading',
+            title: t('error'),
+            message: t('messages_failed_loading'),
                 });
             });
     }
@@ -256,6 +258,8 @@ const Mails = (props) => {
                     <View style={{ width: '5%' }} />
                     <TouchableOpacity activeOpacity={1} style={{ width: '85%', alignItems: 'flex-start', justifyContent: 'center' }}>
                         <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: colors.theme_fg_two, fontSize: f_xl, fontFamily: bold }}>Pesan</Text>
+                        <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: colors.theme_fg_two, fontSize: f_xl, fontFamily: bold }}>{t('messages')}</Text>
+                                        <Text style={{ fontSize: f_tiny, fontFamily: normal, color: 'white', alignSelf: 'flex-end', backgroundColor: colors.btn_color, padding: 3, borderRadius: 5, paddingLeft: 15, paddingRight: 15 }}>{t('view')}</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -321,4 +325,4 @@ const styles = StyleSheet.create({
     segment_inactive_fg: { color: colors.theme_fg_two, fontSize: 12, fontFamily: normal, color: colors.theme_fg_two }
 });
 
-export default Mails;
+export default withTranslation(Mails);

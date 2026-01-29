@@ -13,8 +13,10 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import * as colors from '../assets/css/Colors';
 import { screenHeight, screenWidth, bold, regular, f_25, f_s } from '../config/Constants';
 import Icon, { Icons } from '../components/Icons';
+import withTranslation from '../hook/withTranslation'
 
 const NotificationDetails = (props) => {
+    const { t } = props;
     const navigation = useNavigation();
     const route = useRoute();
     const [data, setData] = useState(route.params.data);
@@ -66,4 +68,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default NotificationDetails;
+export default withTranslation(NotificationDetails);

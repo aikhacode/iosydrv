@@ -4,8 +4,10 @@ import * as colors from '../assets/css/Colors';
 import { app_update, bold } from '../config/Constants';
 import Lottie from 'lottie-react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import withTranslation from '../hook/withTranslation'
 
-const AppUpdate = () => {
+const AppUpdate = (props) => {
+  const { t } = props;
   const navigation = useNavigation();
   const route = useRoute();
   const [url, setUrl] = useState(route.params.url);
@@ -25,9 +27,9 @@ const AppUpdate = () => {
             <Lottie style={{ height:300, width:300 }}source={app_update} autoPlay loop />
         </View>
         <View style={{ alignItems:'center', justifyContent:'center', flex:1}}>
-            <TouchableOpacity onPress={ app_link } style={{ height:40, alignItems:'center', justifyContent:'center', backgroundColor:colors.theme_fg, width:300, borderRadius:10}}>
-                <Text adjustsFontSizeToFit={true}  style={{ color:colors.theme_fg_three, fontFamily:bold, fontSize:14 }}>Update New Version</Text>
-            </TouchableOpacity>
+      <TouchableOpacity onPress={ app_link } style={{ height:40, alignItems:'center', justifyContent:'center', backgroundColor:colors.theme_fg, width:300, borderRadius:10}}>
+        <Text adjustsFontSizeToFit={true}  style={{ color:colors.theme_fg_three, fontFamily:bold, fontSize:14 }}>{t('update_new_version')}</Text>
+      </TouchableOpacity>
         </View>
     </SafeAreaView>
   )
@@ -42,4 +44,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AppUpdate;
+export default withTranslation(AppUpdate);

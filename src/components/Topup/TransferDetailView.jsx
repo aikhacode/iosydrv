@@ -21,10 +21,13 @@ import { formatCurrency } from "../../helper";
 import { useTransferStore } from "../../reducers/zustand";
 
 
-const TransferDetailView = ({ route }) => {
+import withTranslation from '../../hook/withTranslation'
+
+const TransferDetailView = (props) => {
     const navigation = useNavigation();
-    const { title } = route.params;
+    const { title } = props.route.params;
     const { dataTransfer } = useTransferStore()
+    const { t } = props
     const [detailData, setDetailData] = useState([])
     const go_back = () => {
         navigation.goBack(-3);
@@ -35,23 +38,23 @@ const TransferDetailView = ({ route }) => {
             const data = { ...dataTransfer }
             setDetailData([
                 {
-                    label: 'Status',
+                    label: t('status'),
                     value: data.status
                 },
                 {
-                    label: 'ReferenceNo',
+                    label: t('reference_no'),
                     value: data.referenceNo
                 },
                 {
-                    label: 'Bank',
+                    label: t('bank'),
                     value: data.bankName
                 },
                 {
-                    label: 'Nama Rekening',
+                    label: t('account_name'),
                     value: data.accountName
                 },
                 {
-                    label: 'Nomor Rekening',
+                    label: t('account_number'),
                     value: data.accountNumber
                 },
                 // {
@@ -59,7 +62,7 @@ const TransferDetailView = ({ route }) => {
                 //     value: formatCurrency(dataTopup.amount)
                 // },
                 {
-                    label: 'Amount',
+                    label: t('amount'),
                     value: data.amount
                 }
             ])
@@ -95,7 +98,7 @@ const TransferDetailView = ({ route }) => {
     </SafeAreaView>
 }
 
-export default TransferDetailView;
+export default withTranslation(TransferDetailView);
 
 
 

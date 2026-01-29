@@ -18,6 +18,7 @@ import DropdownAlert, {
     DropdownAlertType,
 } from 'react-native-dropdownalert';
 import { connect } from 'react-redux';
+import withTranslation from '../hook/withTranslation'
 import { updateVehicleBrand } from '../actions/VehicleDetailActions';
 import { Picker } from '@react-native-picker/picker';
 import axios from "axios";
@@ -179,4 +180,4 @@ const mapDispatchToProps = (dispatch) => ({
     updateVehicleBrand: (data) => dispatch(updateVehicleBrand(data)),
 });
 
-export default connect(null, mapDispatchToProps)(CreateVehicleBrand);
+export default withTranslation(connect(null, mapDispatchToProps)(CreateVehicleBrand));

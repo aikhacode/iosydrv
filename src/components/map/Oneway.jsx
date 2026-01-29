@@ -17,6 +17,7 @@ import Icon, { Icons } from '../../components/Icons';
 import axios from 'axios';
 import MapView, { Marker } from "react-native-maps";
 import useGeolocation from "./useGeoLocation";
+import withTranslation from '../../hook/withTranslation'
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import GooglePlacesInput from "../GooglePlacesInput";
@@ -29,6 +30,7 @@ const SHEET_ON_PICK = 1
 const SHEET_ON_DIALOG = 2
 
 const OnewayComponent = (props) => {
+    const { t } = props
     const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
     const [on_load, setOnLoad] = useState(0);
@@ -326,15 +328,15 @@ const OnewayComponent = (props) => {
             return (
                 <BottomSheetView style={styles2.contentContainer} >
                     <View style={{ width: '100%', borderWidth: 1, borderColor: 'gray', borderRadius: 8 }}>
-                        <GooglePlacesInput
+                                <GooglePlacesInput
                             minLength={5}
                             onPlaceSelected={handlePlaceSelected}
                         />
 
                     </View>
-                    <View style={{ width: '100%', flexDirection: 'row-reverse' }}>
+                        <View style={{ width: '100%', flexDirection: 'row-reverse' }}>
                         <TouchableOpacity onPress={handleUpdateBE} activeOpacity={0.5} style={{ marginTop: 10, width: 130, height: 35, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.btn_color, borderRadius: 8 }}>
-                            <Text style={{ color: colors.theme_fg_three }}>Set Tujuan Searah</Text>
+                            <Text style={{ color: colors.theme_fg_three }}>{t('set_oneway_destination')}</Text>
                         </TouchableOpacity>
                     </View>
                 </BottomSheetView>
@@ -359,11 +361,11 @@ const OnewayComponent = (props) => {
                         <View style={{ width: '100%', flexDirection: 'row', gap: 20, marginTop: 15 }}>
                             <TouchableOpacity onPress={handleEdit} activeOpacity={0.5} style=
                                 {{ width: '20%', widthmarginTop: 10, height: 35, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.btn_color, borderRadius: 8 }}>
-                                <Text style={{ color: colors.theme_fg_three }}>Edit</Text>
+                                <Text style={{ color: colors.theme_fg_three }}>{t('edit')}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={handleOff} activeOpacity={0.5} style=
                                 {{ width: '20%', widthmarginTop: 10, height: 35, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.btn_color, borderRadius: 8 }}>
-                                <Text style={{ color: colors.theme_fg_three }}>Off</Text>
+                                <Text style={{ color: colors.theme_fg_three }}>{t('off')}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -376,16 +378,16 @@ const OnewayComponent = (props) => {
             return (
                 <BottomSheetView style={styles2.contentContainer} >
                     <View style={{ width: '100%', flexDirection: 'row' }}>
-                        <Text style={{ color: 'black', width: '90%' }}>Lanjutkan</Text>
+                        <Text style={{ color: 'black', width: '90%' }}>{t('continue_action')}</Text>
                     </View>
                     <View style={{ width: '100%', flexDirection: 'row', gap: 15 }}>
 
 
                         <TouchableOpacity loading={isProcessing} onPress={handleYes} activeOpacity={0.5} style={{ marginTop: 10, width: 130, height: 35, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.btn_color, borderRadius: 8 }}>
-                            <Text style={{ color: colors.theme_fg_three }}>OK</Text>
+                            <Text style={{ color: colors.theme_fg_three }}>{t('ok')}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={handleNo} activeOpacity={0.5} style={{ marginTop: 10, width: 130, height: 35, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.btn_color, borderRadius: 8 }}>
-                            <Text style={{ color: colors.theme_fg_three }}>Cancel</Text>
+                            <Text style={{ color: colors.theme_fg_three }}>{t('cancel')}</Text>
                         </TouchableOpacity>
 
 
@@ -410,7 +412,7 @@ const OnewayComponent = (props) => {
                             <Icon type={Icons.MaterialIcons} name="arrow-back" color={colors.theme_fg_three} style={{ fontSize: 30 }} />
                         </TouchableOpacity>
                         <View activeOpacity={1} style={{ width: '85%', alignItems: 'flex-start', justifyContent: 'center' }}>
-                            <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: colors.theme_fg_three, fontSize: f_xl, fontFamily: bold }}>Oneway Trip Setting</Text>
+                            <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: colors.theme_fg_three, fontSize: f_xl, fontFamily: bold }}>{t('one_way_setting')}</Text>
                         </View>
                     </View>
                     <View>
@@ -443,7 +445,7 @@ const OnewayComponent = (props) => {
                                             longitude: item.longitude || 0
                                         }}
 
-                                        title={"Your Location"}
+                                        title={t('your_location')}
                                     />
                                 ))}
 
@@ -514,4 +516,4 @@ const styles2 = StyleSheet.create({
 
 
 
-export default OnewayComponent;
+export default withTranslation(OnewayComponent);

@@ -1,6 +1,7 @@
 import { StyleSheet, View } from "react-native"
 import Icon from "./Icons"
 import { useBroadcastStore } from "../reducers/zustand"
+import withTranslation from '../hook/withTranslation'
 
 
 const WithIcon = (props) => {
@@ -31,4 +32,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default WithIcon
+export default withTranslation(WithIcon)

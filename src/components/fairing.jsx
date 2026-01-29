@@ -6,9 +6,10 @@ import { useNavigation } from '@react-navigation/native';
 import { api_url, prefix } from '../config/Constants';
 import axios from 'axios';
 import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
+import withTranslation from '../hook/withTranslation'
 import { formatCurrency } from '../helper';
 
-const Fairing = ({ setStatus }) => {
+const Fairing = ({ setStatus, t }) => {
     const slide = React.useRef(new Animated.Value(300)).current;
     const [otp, setOtp] = React.useState('');
     const setIsShowTabNavigator = useGlobalStore((state) => state.setIsShowTabNavigator)
@@ -117,7 +118,7 @@ const Fairing = ({ setStatus }) => {
         <Pressable onPress={closeModal} style={styles.backdrop} >
             <Pressable style={{ width: '100%', height: '60%', }}>
                 <Animated.View style={[styles.bottomSheet, { transform: [{ translateY: slide }] }]}>
-                    <Text style={{ fontSize: 25, fontWeight: 'bold' }}>OTP Fairing</Text>
+                    <Text style={{ fontSize: 25, fontWeight: 'bold' }}>{t('otp_fairing')}</Text>
                     <KeyboardAvoidingView behavior={'padding'} style={{ marginTop: 20 }}>
                         <OtpTextInput
                             otp={otp}
@@ -128,7 +129,7 @@ const Fairing = ({ setStatus }) => {
                             focusedStyle={{ borderColor: '#40A2E3' }}
                         />
                         <TouchableOpacity onPress={accept.bind(this)} style={styles.button}>
-                            <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white' }}>Terima Trip</Text>
+                            <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white' }}>{t('accept_trip')}</Text>
                         </TouchableOpacity>
                     </KeyboardAvoidingView>
                 </Animated.View>
@@ -140,7 +141,7 @@ const Fairing = ({ setStatus }) => {
 }
 
 
-export default Fairing;
+export default withTranslation(Fairing);
 
 
 const styles = StyleSheet.create({
