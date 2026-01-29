@@ -39,6 +39,7 @@ import { useGeolocationStore } from "../reducers/zustand";
 import { shallow } from "zustand/shallow";
 import { NativeModules } from "react-native";
 import { PERMISSIONS, request, RESULTS } from "react-native-permissions";
+import LanguageSwitch from '../components/LanguageSwitch'
 
 const { FloatingBubble } = NativeModules;
 
@@ -581,6 +582,7 @@ const Splash = (props) => {
       <StatusBar
         backgroundColor={colors.theme_bg}
       />
+      <LanguageSwitch />
       <View style={styles.logo_container}>
         <Image style={styles.logo} source={logo} />
       </View>
